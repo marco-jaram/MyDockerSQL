@@ -1,0 +1,24 @@
+services:
+  mysql:
+    image: mysql:8.0  # Puedes cambiar la versión si es necesario
+    container_name: my_mysql_db
+    restart: unless-stopped  # Asegura que se reinicie solo si falla
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Cambia esta contraseña por seguridad
+      MYSQL_DATABASE: mydata        # Nombre de la base de datos por defecto
+      MYSQL_USER: user                 # Usuario personalizado
+      MYSQL_PASSWORD: password          # Contraseña del usuario
+    ports:
+      - "3307:3306"  # Mapea el puerto 3306 del contenedor al host
+    volumes:
+      - mysql_data:/var/lib/mysql  # Persistencia de datos
+      - ./mysql-init-scripts:/docker-entrypoint-initdb.d  # Scripts de inicialización
+    networks:
+      - mysql_network
+
+volumes:
+  mysql_data:  # Volumen persistente para la base de datos
+
+networks:
+  mysql_network:
+    driver: bridge
