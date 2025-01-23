@@ -5,3 +5,9 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' my_
 or
 
 docker inspect my_mysql_db | grep "IPAddress"
+
+172.20.0.2
+
+mydata
+user
+password
